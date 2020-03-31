@@ -5,39 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vimeo Example</title>
     <style>
-      #vimeo-iframe {
+      .vimeo-wrapper,
+      .vimeo-wrapper iframe {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: black;
+        background-color: #1d1d1d;
       }
     </style>
     <script src="//player.vimeo.com/api/player.js"></script>
     <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
   </head>
   <body>
-    <iframe
-      id="vimeo-iframe"
-      src="//player.vimeo.com/video/254411106"
-      allow="autoplay; encrypted-media"
-      frameborder="0"
-      allowfullscreen 
-    />
+    <div class="vimeo-wrapper">
+      <iframe
+        id="vimeo-iframe"
+        src="//player.vimeo.com/video/254411106"
+        allow="autoplay; encrypted-media"
+        frameborder="0"
+        allowfullscreen 
+      >
+      </iframe>
+    </div>
     <script>
-      window.addEventListener('load', function() {
-        var iframe = document.querySelector('#vimeo-iframe');
-        var player = new Vimeo.Player(iframe);
-        var app = new PTV(player, {
-          playerType: PTV.TYPES.PLAYERS.VIMEO,
-          channelId: '5c701be7dc3d20080e4092f4',
-          streamId: '5de7e7c2a6adde5211684519'
-        });
-        
-        window.app = app;
-        window.player = player;
+      var iframe = document.querySelector('#vimeo-iframe');
+      var player = new Vimeo.Player(iframe);
+      var app = new PTV(player, {
+        playerType: PTV.TYPES.PLAYERS.VIMEO,
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519'
       });
+
+      window.app = app;
+      window.player = player;
     </script>
   </body>
 </html>
