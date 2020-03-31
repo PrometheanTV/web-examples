@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
     <script src="//player.vimeo.com/api/player.js"></script>
     <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
   </head>
-  <body onload="onLoad()">
+  <body>
     <iframe
       id="vimeo-iframe"
       src="//player.vimeo.com/video/254411106"
@@ -26,7 +26,7 @@
       allowfullscreen 
     />
     <script>
-      function onLoad() {
+      window.addEventListener('load', function() {
         var iframe = document.querySelector('#vimeo-iframe');
         var player = new Vimeo.Player(iframe);
         var app = new PTV(player, {
@@ -37,7 +37,7 @@
         
         window.app = app;
         window.player = player;
-      }
+      });
     </script>
   </body>
 </html>
