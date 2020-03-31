@@ -1,55 +1,56 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vimeo Example</title>
-  <style>
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #000;
-    }
-    .vimeo-wrapper,
-    .vimeo-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #1d1d1d;
-    }
-  </style>
-  <script src="//player.vimeo.com/api/player.js"></script>
-  <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
-</head>
-<body onload="onLoad()">
-  <div id="player-container" class="vimeo-wrapper">
-    <iframe
-      id="vimeo-iframe"
-      src="//player.vimeo.com/video/254411106"
-      frameborder="0"
-      allowfullscreen allow="autoplay; encrypted-media">
-    </iframe>
-  </div>
-  <script>
-    function onLoad() {
-      var iframe = document.querySelector('#vimeo-iframe');
-      var player = new Vimeo.Player(iframe);
-      var app = new PTV(player, {
-        playerType: PTV.TYPES.PLAYERS.VIMEO,
-        channelId: '5c701be7dc3d20080e4092f4',
-        streamId: '5de7e7c2a6adde5211684519',
-        vimeoId: '254411106'
-      });
-
-      window.app = app;
-      window.player = player;
-    }
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vimeo Example</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+      .vimeo-wrapper,
+      .vimeo-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #1d1d1d;
+      }
+    </style>
+    <script src="//player.vimeo.com/api/player.js"></script>
+    <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
+  </head>
+  <body onload="onLoad()">
+    <div class="vimeo-wrapper">
+      <iframe
+        id="vimeo-iframe"
+        src="//player.vimeo.com/video/254411106"
+        allow="autoplay; encrypted-media"
+        frameborder="0"
+        allowfullscreen 
+      >
+      </iframe>
+    </div>
+    <script>
+      function onLoad() {
+        var iframe = document.querySelector('#vimeo-iframe');
+        var player = new Vimeo.Player(iframe);
+        var app = new PTV(player, {
+          playerType: PTV.TYPES.PLAYERS.VIMEO,
+          channelId: '5c701be7dc3d20080e4092f4',
+          streamId: '5de7e7c2a6adde5211684519'
+        });
+        
+        window.app = app;
+        window.player = player;
+      }
+    </script>
+  </body>
 </html>
