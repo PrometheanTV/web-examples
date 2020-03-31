@@ -5,39 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vimeo Example</title>
     <style>
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #000;
-      }
-      .vimeo-wrapper,
-      .vimeo-wrapper iframe {
+      #vimeo-iframe {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #1d1d1d;
+        background: black;
       }
     </style>
     <script src="//player.vimeo.com/api/player.js"></script>
     <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
   </head>
   <body onload="onLoad()">
-    <div class="vimeo-wrapper">
-      <iframe
-        id="vimeo-iframe"
-        src="//player.vimeo.com/video/254411106"
-        allow="autoplay; encrypted-media"
-        frameborder="0"
-        allowfullscreen 
-      >
-      </iframe>
-    </div>
+    <iframe
+      id="vimeo-iframe"
+      src="//player.vimeo.com/video/254411106"
+      allow="autoplay; encrypted-media"
+      frameborder="0"
+      allowfullscreen 
+    />
     <script>
       function onLoad() {
         var iframe = document.querySelector('#vimeo-iframe');
