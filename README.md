@@ -4,3 +4,7 @@ Sample integrations of major players with PTV SDK
 ## Platforms
 
 - [Vimeo](vimeo/)
+
+## Players
+
+- [Video.js](videojs/)
