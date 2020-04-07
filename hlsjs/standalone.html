@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hls.js Standalone Example</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background-color: black;
+    }
+  </style>
+  <script src="//cdn.jsdelivr.net/npm/hls.js@0.12.4/dist/hls.min.js"></script>
+  <script src="//embed.promethean.tv/static/js/latest/ptv.js"></script>
+</head>
+<body>   
+  <div id="ptv-root"></div>
+  <video id="hlsjs-player" height="100%" width="100%" controls></video>
+  <script>
+    var video = document.getElementById('hlsjs-player');
+    var hls = new Hls();
+    var app = new PTV(null, {
+      domId: 'ptv-root',
+      channelId: '5c701be7dc3d20080e4092f4',
+      streamId: '5de7e7c2a6adde5211684519'
+    });
+    
+    // SDK callback events    
+    app.on(PTV.EventType.CONFIG_READY, function(data) {
+      hls.loadSource(data.src);      
+      hls.attachMedia(video);
+    });
+         
+    // Player callback events
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play();
+      app.start();
+    });    
+    hls.on('play', function() {
+      app.show();
+    });    
+    hls.on('pause', function() {
+      app.hide();
+    });    
+    hls.on('timeupdate', function(time) {
+      app.timeUpdate(time);
+    });
+    hls.on('ended', function() {
+      app.stop();
+    });
+    hls.on('error', function() {
+      app.stop();
+    });
+    
+    // For testing
+    window.player = hls;
+    window.app = app;
+  </script>
+</body>
+</html>
