@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video.js Standalone</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background-color: black;
+    }
+    #videojs-player {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link href="//unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+  <script src="//unpkg.com/video.js/dist/video.js"></script>
+  <script src="//unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+  <script src="//embed.promethean.tv/static/js/latest/ptv.js"></script>
+</head>
+<body>
+  <div id="ptv-root"></div>
+  <video id="videojs-player" class="video-js vjs-default-skin" controls></video>
+<script>
+    var player = videojs('videojs-player');
+    var app = new PTV(null, {
+      domId: 'ptv-root',
+      channelId: '5c701be7dc3d20080e4092f4',
+      streamId: '5de7e7c2a6adde5211684519'
+    });
+
+    // SDK callback events
+    app.on(PTV.EventType.CONFIG_READY, function(data) {
+      player.src(data.src);
+      player.play();
+      app.start();
+    });
+
+    // Player callback events
+    player.on('ended', function() {
+      app.stop();
+    });
+    player.on('error', function() {
+      app.stop();
+    });
+    player.on('pause', function() {
+      app.hide();
+    });
+    player.on('play', function() {
+      app.show();
+    });
+    player.on('timeupdate', function() {
+      app.timeUpdate(player.currentTime());
+    });
+
+    // For testing
+    window.player = player;
+    window.app = app;
+  </script>
+</body>
+</html>
