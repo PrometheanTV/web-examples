@@ -7,4 +7,5 @@ Sample integrations of major players with PTV SDK
 
 ## Players
 
+- [Hls.js](hlsjs/)
 - [Video.js](videojs/)
