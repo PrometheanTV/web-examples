@@ -39,11 +39,11 @@
     });
 
     // Player callback events
-    player.one('loadeddata', app.start);
-    player.on('ended', app.stop);
-    player.on('error', app.stop);
-    player.on('pause', app.hide);
-    player.on('play', app.show);
+    player.one('loadeddata', () => app.start());
+    player.on('ended', () => app.stop());
+    player.on('error', () => app.stop());
+    player.on('pause', () => app.hide());
+    player.on('play', () => app.show());
     player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
 
     // For testing
