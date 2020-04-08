@@ -39,7 +39,7 @@
     });
 
     // Player callback events
-    player.one('play', app.start);
+    player.one('loadeddata', app.start);
     player.on('ended', app.stop);
     player.on('error', app.stop);
     player.on('pause', app.hide);
