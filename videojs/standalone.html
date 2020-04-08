@@ -44,7 +44,7 @@
     player.on('error', app.stop);
     player.on('pause', app.hide);
     player.on('play', app.show);
-    player.on('timeupdate', app.timeUpdate(player.currentTime()));
+    player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
 
     // For testing
     window.player = player;
