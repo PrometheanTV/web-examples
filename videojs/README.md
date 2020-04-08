@@ -8,4 +8,4 @@ Example integrations using Video.js
 
 ## Demo
 
-<script async src="//jsfiddle.net/ptvandi/jyz456fb/22/embed/"></script>
+[JSFiddle](https://jsfiddle.net/ptvandi/jyz456fb/)
