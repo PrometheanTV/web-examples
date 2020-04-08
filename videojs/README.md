@@ -8,4 +8,4 @@ Example integrations using Video.js
 
 ## Demo
 
-[JSFiddle](https://jsfiddle.net/ptvandi/jyz456fb/)
+[Live JSFiddle demo](https://jsfiddle.net/ptvandi/jyz456fb/)
