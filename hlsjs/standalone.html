@@ -34,25 +34,13 @@
     });
          
     // Player callback events
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-      app.start();
-    });    
-    hls.on('play', function() {
-      app.show();
-    });    
-    hls.on('pause', function() {
-      app.hide();
-    });    
-    hls.on('timeupdate', function(time) {
-      app.timeUpdate(time);
-    });
-    hls.on('ended', function() {
-      app.stop();
-    });
-    hls.on('error', function() {
-      app.stop();
-    });
+    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+    hls.on(Hls.Events.MANIFEST_LOADED, () => app.start());
+    hls.on('play', () => app.show());    
+    hls.on('pause', () => app.hide());    
+    hls.on('timeupdate', (time) => app.timeUpdate(time));
+    hls.on('ended', () => app.stop());
+    hls.on('error', () => app.stop());
     
     // For testing
     window.player = hls;
