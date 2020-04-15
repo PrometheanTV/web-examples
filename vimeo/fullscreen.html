@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vimeo Standalone</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background-color: #000;
+      }
+
+      #container {
+        width: 100%;
+        height: 100%;
+      }
+
+      #vimeo-container,
+      #vimeo-container iframe {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #button-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      #fullscreen-button {
+        padding: 8px;
+        margin: 10px;
+        background: rgba(23, 35, 34, 0.75);
+        border: none;
+        border-radius: 5px;
+        fill: white;
+        cursor: pointer;
+        outline: none;
+      }
+
+      #fullscreen-button:active,
+      #fullscreen-button:hover{
+        background: #1ab7ea;
+      }
+    </style>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/screenfull.js/5.0.0/screenfull.min.js"></script>
+    <script src="//player.vimeo.com/api/player.js"></script>
+    <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>    
+  </head>
+  
+  <body>
+    <div id="container">
+      <div id="vimeo-container">
+        <div id="ptv-root"></div>
+        <iframe id="vimeo-player" allow="autoplay; fullscreen" frameborder="0" src="https://player.vimeo.com/video/254411106"></iframe>
+      </div>
+      <div id="button-container">
+        <button id="fullscreen-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path d="M24 9h-2v-7h-7v-2h9v9zm-9 15v-2h7v-7h2v9h-9zm-15-9h2v7h7v2h-9v-9zm9-15v2h-7v7h-2v-9h9z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <script>
+      const button = document.querySelector('#fullscreen-button');
+      const iframe = document.querySelector('#vimeo-player');
+      const player = new Vimeo.Player(iframe);
+      const app = new PTV(null, {
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519',
+        domId: 'ptv-root'
+      });
+
+      // Player callback events
+      player.on('play', function handleFirstPlay() {
+        player.off('play', handleFirstPlay);
+        app.start();
+      });
+      player.on('ended', () => app.stop());
+      player.on('error', () => app.stop());
+      player.on('pause', () => app.hide());
+      player.on('play', () => app.show());
+      player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
+
+
+      // Fullscreen button
+      button.addEventListener('click', () => screenfull.toggle());    
+    </script>
+  </body>
+
+</html>
