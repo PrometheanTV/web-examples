@@ -1,5 +1,5 @@
-# Sample integrations
-Sample integrations of major players with PTV SDK
+# Example pages
+Example pages demonstrating the Promethean TV JavaScript SDK with different players
 
 ## Players
 
