@@ -1,8 +1,11 @@
-# THEO Player
+# THEOplayer
 
-Example integrations using THEO player
+Example integrations using THEOplayer
 
 ## Examples
 
-[Standalone](./standalone.html)
+### Basic
+- [Code](./basic.html)
+- [Demo](https://prometheantv.github.io/web-examples/theo/basic.html)
+- [JSFiddle](https://jsfiddle.net/ptvandi/fjqzvcn5/)
 
