@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brightcove Basic Example</title>  
+  <title>Brightcove Basic Example</title>
   <style>
     html,
     body {
@@ -20,29 +20,29 @@
   <video-js id="brightcove-player" class="video-js vjs-fill vjs-big-play-centered" controls />
   <script>
     const player = videojs('brightcove-player');
-    const app = new PTV(null, {
+    const ptvsdk = new PTV(null, {
       domId: 'ptv-root',
       channelId: '5c701be7dc3d20080e4092f4',
       streamId: '5de7e7c2a6adde5211684519'
     });
 
     // SDK callback events
-    app.on(PTV.EventType.CONFIG_READY, data => {
-      player.el().appendChild(app.el());
+    ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
+      player.el().appendChild(ptvsdk.el());
       player.src(data.src);
     });
 
     // Player callback events
-    player.one('play', () => app.start())
-    player.on('ended', () => app.stop());
-    player.on('error', () => app.stop());
-    player.on('pause', () => app.hide());
-    player.on('play', () => app.show());
-    player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
+    player.one('play', () => ptvsdk.start())
+    player.on('ended', () => ptvsdk.stop());
+    player.on('error', () => ptvsdk.stop());
+    player.on('pause', () => ptvsdk.hide());
+    player.on('play', () => ptvsdk.show());
+    player.on('timeupdate', () => ptvsdk.timeUpdate(player.currentTime()));
 
     // For testing
     window.player = player;
-    window.app = app;
+    window.ptvsdk = ptvsdk;
   </script>
 </body>
 </html>

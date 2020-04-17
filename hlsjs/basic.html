@@ -15,36 +15,36 @@
   <script src="//cdn.jsdelivr.net/npm/hls.js@0.12.4/dist/hls.min.js"></script>
   <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
 </head>
-<body>   
+<body>
   <div id="ptv-root"></div>
   <video id="hlsjs-player" height="100%" width="100%" controls></video>
   <script>
     var video = document.getElementById('hlsjs-player');
     var hls = new Hls();
-    var app = new PTV(null, {
+    var ptvsdk = new PTV(null, {
       domId: 'ptv-root',
       channelId: '5c701be7dc3d20080e4092f4',
       streamId: '5de7e7c2a6adde5211684519'
     });
-    
-    // SDK callback events    
-    app.on(PTV.EventType.CONFIG_READY, function(data) {
-      hls.loadSource(data.src);      
+
+    // SDK callback events
+    ptvsdk.on(PTV.EventType.CONFIG_READY, function(data) {
+      hls.loadSource(data.src);
       hls.attachMedia(video);
     });
-         
+
     // Player callback events
     hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-    hls.on(Hls.Events.MANIFEST_LOADED, () => app.start());
-    hls.on('play', () => app.show());    
-    hls.on('pause', () => app.hide());    
-    hls.on('timeupdate', (time) => app.timeUpdate(time));
-    hls.on('ended', () => app.stop());
-    hls.on('error', () => app.stop());
-    
+    hls.on(Hls.Events.MANIFEST_LOADED, () => ptvsdk.start());
+    hls.on('play', () => ptvsdk.show());
+    hls.on('pause', () => ptvsdk.hide());
+    hls.on('timeupdate', (time) => ptvsdk.timeUpdate(time));
+    hls.on('ended', () => ptvsdk.stop());
+    hls.on('error', () => ptvsdk.stop());
+
     // For testing
     window.player = hls;
-    window.app = app;
+    window.ptvsdk = ptvsdk;
   </script>
 </body>
 </html>

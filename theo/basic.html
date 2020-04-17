@@ -24,15 +24,15 @@
     const player = new THEOplayer.Player(element, {
       libraryLocation: "//cdn.myth.theoplayer.com/663d16d2-78df-474b-ba87-aabf9e59d00a"
     });
-    const app = new PTV(null, {
+    const ptvsdk = new PTV(null, {
       domId: 'ptv-root',
       channelId: '5c701be7dc3d20080e4092f4',
       streamId: '5de7e7c2a6adde5211684519'
     });
 
     // SDK callback events
-    app.on(PTV.EventType.CONFIG_READY, data => {
-      player.element.appendChild(app.el());
+    ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
+      player.element.appendChild(ptvsdk.el());
       player.source = {
         sources: [{
           src: data.src,
@@ -44,13 +44,13 @@
     // Player callback events
     player.addEventListener('play', function handleFirstPlay() {
       player.removeEventListener('play', handleFirstPlay);
-      app.start();
+      ptvsdk.start();
     });
-    player.addEventListener('ended', () => app.stop());
-    player.addEventListener('error', () => app.stop());
-    player.addEventListener('pause', () => app.hide());
-    player.addEventListener('play', () => app.show());
-    player.addEventListener('timeupdate', () => app.timeUpdate(player.currentTime));
+    player.addEventListener('ended', () => ptvsdk.stop());
+    player.addEventListener('error', () => ptvsdk.stop());
+    player.addEventListener('pause', () => ptvsdk.hide());
+    player.addEventListener('play', () => ptvsdk.show());
+    player.addEventListener('timeupdate', () => ptvsdk.timeUpdate(player.currentTime));
   </script>
 </body>
 </html>
