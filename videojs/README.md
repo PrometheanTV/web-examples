@@ -6,5 +6,5 @@ Example integrations using Video.js
 
 ### Standalone
 - [Code](./standalone.html)
-- [Demo](https://prometheantv.github.io/web-examples/jwplayer/standalone.html)
+- [Demo](https://prometheantv.github.io/web-examples/videojs/standalone.html)
 - [JSFiddle](https://jsfiddle.net/ptvandi/jyz456fb/)
