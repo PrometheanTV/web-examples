@@ -39,10 +39,6 @@
     player.on('pause', () => ptvsdk.hide());
     player.on('play', () => ptvsdk.show());
     player.on('timeupdate', () => ptvsdk.timeUpdate(player.currentTime()));
-
-    // For testing
-    window.player = player;
-    window.ptvsdk = ptvsdk;
   </script>
 </body>
 </html>
