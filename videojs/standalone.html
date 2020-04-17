@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Video.js Standalone</title>
+  <title>Brightcove Standalone</title>  
   <style>
     html,
     body {
@@ -16,16 +16,14 @@
       width: 100%;
     }
   </style>
-  <link href="//unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-  <script src="//unpkg.com/video.js/dist/video.js"></script>
-  <script src="//unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+  <script src="//players.brightcove.net/5687692865001/default_default/index.min.js"></script>
   <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
 </head>
 <body>
   <div id="ptv-root"></div>
-  <video id="videojs-player" class="video-js vjs-default-skin" controls></video>
+  <video-js id="brightcove-player" data-account="5687692865001" data-player="default" data-embed="default" controls="" data-application-id="" class="video-js vjs-default-skin vjs-fill vjs-big-play-centered" />
   <script>
-    const player = videojs('videojs-player');
+    const player = videojs('brightcove-player');
     const app = new PTV(null, {
       domId: 'ptv-root',
       channelId: '5c701be7dc3d20080e4092f4',
@@ -36,11 +34,10 @@
     app.on(PTV.EventType.CONFIG_READY, data => {
       player.el().appendChild(app.el());
       player.src(data.src);
-      player.play();
     });
 
     // Player callback events
-    player.one('loadeddata', () => app.start());
+    player.one('play', () => app.start())
     player.on('ended', () => app.stop());
     player.on('error', () => app.stop());
     player.on('pause', () => app.hide());
