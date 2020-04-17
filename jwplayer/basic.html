@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JW Player Basic Example</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+  </style>
+  <script src="//player.promethean.tv/jw/jwplayer.js"></script>
+  <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>  
+  <script>jwplayer.key = "Y98UnpAsEL5MncSWF6Vx+rL44N/peuNDZMNdP/HxKLhy+sUG1VyiC/qwzlk=";</script>
+</head>
+<body>
+  <div id="ptv-root"></div>
+  <div id="jw-container"></div>
+  <script>
+    const player = jwplayer('jw-container');
+    const app = new PTV(null, {
+      domId: 'ptv-root',
+      channelId: '5c701be7dc3d20080e4092f4',
+      streamId: '5de7e7c2a6adde5211684519'
+    });
+
+    // Initialize player
+    player.setup({
+      playlist: '//cdn.jwplayer.com/v2/media/c6bCKVYE',
+      height: '100%',
+      width: '100%'
+    });
+
+    // Player callback events
+    player.once('ready', () => player.getContainer().appendChild(app.el()));
+    player.once('play', () => app.start())
+    player.on('ended', () => app.stop());
+    player.on('error', () => app.stop());
+    player.on('pause', () => app.hide());
+    player.on('play', () => app.show());
+    player.on('time', time => app.timeUpdate(time.position));
+  </script>
+</body>
+</html>
