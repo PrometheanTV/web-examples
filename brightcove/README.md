@@ -4,8 +4,8 @@ Example integrations using Brightcove
 
 ## Examples
 
-### Standalone
-- [Code](./standalone.html)
-- [Demo](https://prometheantv.github.io/web-examples/brightcove/standalone.html)
+### Basic
+- [Code](./basic.html)
+- [Demo](https://prometheantv.github.io/web-examples/brightcove/basic.html)
 - [JSFiddle](https://jsfiddle.net/ptvandi/5yeLwmoh/)
 
