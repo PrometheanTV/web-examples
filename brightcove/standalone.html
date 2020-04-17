@@ -11,17 +11,13 @@
       margin: 0;
       background-color: black;
     }
-    #videojs-player {
-      height: 100%;
-      width: 100%;
-    }
   </style>
   <script src="//players.brightcove.net/5687692865001/default_default/index.min.js"></script>
   <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
 </head>
 <body>
   <div id="ptv-root"></div>
-  <video-js id="brightcove-player" data-account="5687692865001" data-player="default" data-embed="default" controls="" data-application-id="" class="video-js vjs-default-skin vjs-fill vjs-big-play-centered" />
+  <video-js id="brightcove-player" class="video-js vjs-default-skin vjs-fill vjs-big-play-centered" data-account="5687692865001" data-application-id=""  data-player="default" data-embed="default" controls="" />
   <script>
     const player = videojs('brightcove-player');
     const app = new PTV(null, {
