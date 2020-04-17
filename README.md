@@ -3,6 +3,7 @@ Example pages demonstrating the Promethean TV JavaScript SDK with different play
 
 ## Players
 
+- [Brightcove](brightcove/)
 - [Hls.js](hlsjs/)
 - [JW Player](jwplayer/)
 - [Video.js](videojs/)
