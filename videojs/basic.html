@@ -26,29 +26,25 @@
   <video id="videojs-player" class="video-js vjs-default-skin" controls></video>
   <script>
     const player = videojs('videojs-player');
-    const app = new PTV(null, {
+    const ptvsdk = new PTV(null, {
       domId: 'ptv-root',
       channelId: '5c701be7dc3d20080e4092f4',
       streamId: '5de7e7c2a6adde5211684519'
     });
 
     // SDK callback events
-    app.on(PTV.EventType.CONFIG_READY, data => {
-      player.el().appendChild(app.el());
+    ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
+      player.el().appendChild(ptvsdk.el());
       player.src(data.src);
     });
 
     // Player callback events
-    player.one('play', () => app.start());
-    player.on('ended', () => app.stop());
-    player.on('error', () => app.stop());
-    player.on('pause', () => app.hide());
-    player.on('play', () => app.show());
-    player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
-
-    // For testing
-    window.player = player;
-    window.app = app;
+    player.one('play', () => ptvsdk.start());
+    player.on('ended', () => ptvsdk.stop());
+    player.on('error', () => ptvsdk.stop());
+    player.on('pause', () => ptvsdk.hide());
+    player.on('play', () => ptvsdk.show());
+    player.on('timeupdate', () => ptvsdk.timeUpdate(player.currentTime()));
   </script>
 </body>
 </html>
