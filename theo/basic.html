@@ -50,7 +50,7 @@
     player.addEventListener('error', () => app.stop());
     player.addEventListener('pause', () => app.hide());
     player.addEventListener('play', () => app.show());
-    player.addEventListener('timeupdate', () => app.timeUpdate(player.currentTime()));
+    player.addEventListener('timeupdate', () => app.timeUpdate(player.currentTime));
   </script>
 </body>
 </html>
