@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>THEOplayer Basic Example</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background-color: #000;
+    }
+  </style>
+  <link rel="stylesheet" href="//cdn.myth.theoplayer.com/663d16d2-78df-474b-ba87-aabf9e59d00a/ui.css" />
+  <script src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+  <script src="//cdn.myth.theoplayer.com/663d16d2-78df-474b-ba87-aabf9e59d00a/THEOplayer.js"></script>
+  <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
+</head>
+<body>
+  <div id="ptv-root"></div>
+  <div id="theoplayer" class="theoplayer-container theoplayer-skin video-js vjs-fluid vjs-fill"></div>
+  <script>
+    const element = document.querySelector('#theoplayer');
+    const player = new THEOplayer.Player(element, {
+      libraryLocation: "//cdn.myth.theoplayer.com/663d16d2-78df-474b-ba87-aabf9e59d00a"
+    });
+    const app = new PTV(null, {
+      domId: 'ptv-root',
+      channelId: '5c701be7dc3d20080e4092f4',
+      streamId: '5de7e7c2a6adde5211684519'
+    });
+
+    // SDK callback events
+    app.on(PTV.EventType.CONFIG_READY, data => {
+      player.element.appendChild(app.el());
+      player.source = {
+        sources: [{
+          src: data.src,
+          type: data.type
+        }]
+      };
+    });
+
+    // Player callback events
+    player.addEventListener('play', function handleFirstPlay() {
+      player.removeEventListener('play', handleFirstPlay);
+      app.start();
+    });
+    player.addEventListener('ended', () => app.stop());
+    player.addEventListener('error', () => app.stop());
+    player.addEventListener('pause', () => app.hide());
+    player.addEventListener('play', () => app.show());
+    player.addEventListener('timeupdate', () => app.timeUpdate(player.currentTime()));
+  </script>
+</body>
+</html>
