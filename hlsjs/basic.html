@@ -20,7 +20,7 @@
   <video id="hlsjs-player" height="100%" width="100%" controls></video>
   <script>
     var video = document.getElementById('hlsjs-player');
-    var hls = new Hls();
+    var player = new Hls();
     var ptvsdk = new PTV(null, {
       domId: 'ptv-root',
       channelId: '5c701be7dc3d20080e4092f4',
@@ -29,22 +29,18 @@
 
     // SDK callback events
     ptvsdk.on(PTV.EventType.CONFIG_READY, function(data) {
-      hls.loadSource(data.src);
-      hls.attachMedia(video);
+      player.loadSource(data.src);
+      player.attachMedia(video);
     });
 
     // Player callback events
-    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-    hls.on(Hls.Events.MANIFEST_LOADED, () => ptvsdk.start());
-    hls.on('play', () => ptvsdk.show());
-    hls.on('pause', () => ptvsdk.hide());
-    hls.on('timeupdate', time => ptvsdk.timeUpdate(time));
-    hls.on('ended', () => ptvsdk.stop());
-    hls.on('error', () => ptvsdk.stop());
-
-    // For testing
-    window.player = hls;
-    window.ptvsdk = ptvsdk;
+    player.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+    player.on(Hls.Events.MANIFEST_LOADED, () => ptvsdk.start());
+    player.on('play', () => ptvsdk.show());
+    player.on('pause', () => ptvsdk.hide());
+    player.on('timeupdate', time => ptvsdk.timeUpdate(time));
+    player.on('ended', () => ptvsdk.stop());
+    player.on('error', () => ptvsdk.stop());
   </script>
 </body>
 </html>
