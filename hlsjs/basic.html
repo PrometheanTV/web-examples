@@ -38,7 +38,7 @@
     hls.on(Hls.Events.MANIFEST_LOADED, () => ptvsdk.start());
     hls.on('play', () => ptvsdk.show());
     hls.on('pause', () => ptvsdk.hide());
-    hls.on('timeupdate', (time) => ptvsdk.timeUpdate(time));
+    hls.on('timeupdate', time => ptvsdk.timeUpdate(time));
     hls.on('ended', () => ptvsdk.stop());
     hls.on('error', () => ptvsdk.stop());
 
