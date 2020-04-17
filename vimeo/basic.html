@@ -43,7 +43,7 @@
     <script>
       const iframe = document.querySelector('#vimeo-player');
       const player = new Vimeo.Player(iframe);
-      const app = new PTV(null, {
+      const ptvsdk = new PTV(null, {
         channelId: '5c701be7dc3d20080e4092f4',
         streamId: '5de7e7c2a6adde5211684519',
         domId: 'ptv-root'
@@ -52,13 +52,13 @@
       // Player callback events
       player.on('play', function handleFirstPlay() {
         player.off('play', handleFirstPlay);
-        app.start();
+        ptvsdk.start();
       });
-      player.on('ended', () => app.stop());
-      player.on('error', () => app.stop());
-      player.on('pause', () => app.hide());
-      player.on('play', () => app.show());
-      player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
+      player.on('ended', () => ptvsdk.stop());
+      player.on('error', () => ptvsdk.stop());
+      player.on('pause', () => ptvsdk.hide());
+      player.on('play', () => ptvsdk.show());
+      player.on('timeupdate', () => ptvsdk.timeUpdate(player.currentTime()));
     </script>
   </body>
 
