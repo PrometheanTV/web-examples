@@ -8,4 +8,4 @@ Example integrations using Akamai Media Player (AMP)
 
 - [Code](./basic.html)
 - [Demo](https://prometheantv.github.io/web-examples/akamai/basic.html)
-- [JSFiddle](https://jsfiddle.net/ptvandi/jyz456fb/)
+- [JSFiddle](https://jsfiddle.net/tomjohnson916/8yk4u71z/)
