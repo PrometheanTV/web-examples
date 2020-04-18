@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Akamai Media Player Basic Example</title>
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+    </style>
+    <script src="//amp.akamaized.net/hosted/1.1/player.esi?apikey=promethean.trial&version=9.0.6"></script>
+    <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
+  </head>
+
+  <body>
+    <div id="ptv-root"></div>
+    <div id="player-root"></div>
+    <script>
+      akamai.amp.AMP.create("player-root", {
+        playsinline: true,
+        autoplay: "muted",
+      }).then((player) => {
+        const app = new PTV(null, {
+          domId: "ptv-root",
+          channelId: "5c701be7dc3d20080e4092f4",
+          streamId: "5de7e7c2a6adde5211684519",
+        });
+
+        // SDK callback events
+        app.on(PTV.EventType.CONFIG_READY, (data) => {
+          // NOTE: AMP does not support application/vnd.apple.mpegurl
+          if (data && data.type === "application/vnd.apple.mpegurl") {
+            data.type = "application/x-mpegURL";
+          }
+
+          // Add DOM Binding
+          player.container.appendChild(app.el());
+
+          // Set Media
+          player.media = {
+            src: data.src,
+            type: data.type,
+          };
+        });
+
+        // Player callback events
+        player.addEventListener("loadeddata", () => app.start());
+        player.addEventListener("ended", () => app.stop());
+        player.addEventListener("error", () => app.stop());
+        player.addEventListener("pause", () => app.hide());
+        player.addEventListener("play", () => app.show());
+        player.addEventListener("timeupdate", (time) => app.timeUpdate(time));
+      });
+    </script>
+  </body>
+</html>

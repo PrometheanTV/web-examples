@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phenix RTS Basic Example</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background-color: black;
+      }
+
+      #videojs-player {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <link href="//unpkg.com/video.js/dist/video-js.css" rel="stylesheet" />
+    <script src="//unpkg.com/video.js/dist/video.js"></script>
+    <script src="//dl.phenixrts.com/WebSDK/2019.2.latest/phenix-web-sdk.min.js"></script>
+    <script src="//unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+    <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
+  </head>
+
+  <body>
+    <div id="ptv-root"></div>
+    <video
+      id="videojs-player"
+      class="video-js vjs-default-skin"
+      controls
+    ></video>
+    <script>
+      const sdk = window["phenix-web-sdk"];
+      const player = videojs("videojs-player", { autoplay: true });
+      const app = new PTV(null, {
+        domId: "ptv-root",
+        channelId: "5c701be7dc3d20080e4092f4",
+        streamId: "5de7e7c2a6adde5211684519",
+      });
+      const channelAlias = "phenixWebsiteDemo";
+
+      let disposables = [];
+
+      const setupPhenix = () => {
+        let isMobileAppleDevice =
+          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        let isOtherMobile = /Android|webOS|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(
+          navigator.userAgent
+        );
+        let videoElement = player.el().querySelector(".vjs-tech");
+        let backendUri = "https://demo-integration.phenixrts.com/pcast";
+        let features = ["real-time", "hls"];
+        let adminApiProxyClient = new sdk.net.AdminApiProxyClient();
+
+        adminApiProxyClient.setBackendUri(backendUri);
+        adminApiProxyClient.setAuthenticationData({
+          userId: "my-user-id-that-is-NOT-related-to-application-id",
+          password: "my-password-that-is-NOT-related-to-secret",
+        });
+
+        let channelExpressOptions = {
+          features: features,
+          adminApiProxyClient: adminApiProxyClient,
+        };
+
+        let joinChannelOptions = {
+          alias: channelAlias,
+          videoElement: videoElement,
+          streamSelectionStrategy: "most-recent",
+        };
+
+        let channel = new sdk.express.ChannelExpress(channelExpressOptions);
+
+        channel.joinChannel(
+          joinChannelOptions,
+          function joinChannelCallback(error, response) {
+            if (error) {
+              console.error("Unable to join channel", error);
+              // Handle error
+              return;
+            }
+          },
+          function subscriberCallback(error, response) {
+            for (var i = 0; i < disposables.length; i++) {
+              disposables[i].dispose();
+            }
+            disposables.length = 0;
+
+            if (response.renderer) {
+              disposables.push(
+                response.renderer.on(
+                  "failedToPlay",
+                  function handleFailedToPlay(reason) {
+                    if (isMobileAppleDevice && reason === "failed-to-play") {
+                      videoElement.onplay = function () {
+                        response.renderer.start(videoElement);
+                        videoElement.onplay = null;
+                      };
+                    }
+                  }
+                )
+              );
+            }
+          }
+        );
+      };
+
+      // SDK callback events
+      app.on(PTV.EventType.CONFIG_READY, (data) => {
+        player.el().appendChild(app.el());
+        setupPhenix();
+      });
+
+      // Player callback events
+      player.one("play", () => app.start());
+      player.on("ended", () => app.stop());
+      player.on("error", () => app.stop());
+      player.on("pause", () => app.hide());
+      player.on("play", () => app.show());
+      player.on("timeupdate", () => app.timeUpdate(player.currentTime()));
+    </script>
+  </body>
+</html>
