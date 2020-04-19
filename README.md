@@ -14,3 +14,4 @@ Example pages demonstrating the Promethean TV JavaScript SDK with different play
 - [Twitch](twitch/)
 - [Video.js](videojs/)
 - [Vimeo](vimeo/)
+- [YouTube](youtube/)
