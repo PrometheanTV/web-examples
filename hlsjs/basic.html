@@ -34,13 +34,15 @@
     });
 
     // Player callback events
-    player.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-    player.on(Hls.Events.MANIFEST_LOADED, () => ptvsdk.start());
-    player.on('play', () => ptvsdk.show());
-    player.on('pause', () => ptvsdk.hide());
-    player.on('timeupdate', time => ptvsdk.timeUpdate(time));
-    player.on('ended', () => ptvsdk.stop());
-    player.on('error', () => ptvsdk.stop());
+    video.addEventListener('play', function handleFirstPlay() {
+      video.removeEventListener('play', handleFirstPlay);
+      ptvsdk.start();
+    });
+    video.addEventListener('ended', () => ptvsdk.stop());
+    video.addEventListener('error', () => ptvsdk.stop());
+    video.addEventListener('pause', () => ptvsdk.hide());
+    video.addEventListener('play', () => ptvsdk.show());
+    video.addEventListener('timeupdate', () => ptvsdk.timeUpdate(video.currentTime));
   </script>
 </body>
 </html>
