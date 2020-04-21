@@ -25,11 +25,11 @@
       muted
     />
     <script>
-      const player = videojs("brightcove-player");
+      const player = videojs('brightcove-player');
       const ptvsdk = new PTV(null, {
-        domId: "ptv-root",
-        channelId: "5c701be7dc3d20080e4092f4",
-        streamId: "5de7e7c2a6adde5211684519",
+        domId: 'ptv-root',
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519',
       });
 
       // SDK callback events
@@ -39,12 +39,12 @@
       });
 
       // Player callback events
-      player.one("play", () => ptvsdk.start());
-      player.on("ended", () => ptvsdk.stop());
-      player.on("error", () => ptvsdk.stop());
-      player.on("pause", () => ptvsdk.hide());
-      player.on("play", () => ptvsdk.show());
-      player.on("timeupdate", () => ptvsdk.timeUpdate(player.currentTime()));
+      player.one('play', () => ptvsdk.start());
+      player.on('ended', () => ptvsdk.stop());
+      player.on('error', () => ptvsdk.stop());
+      player.on('pause', () => ptvsdk.hide());
+      player.on('play', () => ptvsdk.show());
+      player.on('timeupdate', () => ptvsdk.timeUpdate(player.currentTime()));
     </script>
   </body>
 </html>
