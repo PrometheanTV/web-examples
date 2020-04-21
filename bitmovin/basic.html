@@ -27,25 +27,25 @@
     <div id="player-root"></div>
 
     <script>
-      const player = window.bitmovin.player("player-root");
+      const player = window.bitmovin.player('player-root');
       const ptvsdk = new PTV(null, {
-        domId: "ptv-root",
-        channelId: "5c701be7dc3d20080e4092f4",
-        streamId: "5de7e7c2a6adde5211684519",
+        domId: 'ptv-root',
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519',
       });
 
       player.setup({
-        key: "9e73a2e6-b99e-44b2-99a9-fd8c684530dd",
+        key: '9e73a2e6-b99e-44b2-99a9-fd8c684530dd',
         playback: {
           autoplay: true,
           muted: true,
         },
         events: {
-          onSourceLoaded: () => ptvsdk.start(),
-          onPlay: () => ptvsdk.show(),
-          onPaused: () => ptvsdk.hide(),
-          onPlaybackFinished: () => ptvsdk.stop(),
-          onError: () => ptvsdk.stop(),
+          onSourceLoaded: ptvsdk.start(),
+          onPlay: ptvsdk.show(),
+          onPaused: ptvsdk.hide(),
+          onPlaybackFinished: ptvsdk.stop(),
+          onError: ptvsdk.stop(),
           onTimeChanged: (e) => ptvsdk.timeUpdate(e.time),
         },
       });

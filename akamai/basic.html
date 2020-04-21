@@ -26,21 +26,21 @@
         playsinline: true,
         autoplay: 'muted',
       }).then((player) => {
-        const app = new PTV(null, {
+        const ptvsdk = new PTV(null, {
           domId: 'ptv-root',
           channelId: '5c701be7dc3d20080e4092f4',
           streamId: '5de7e7c2a6adde5211684519',
         });
 
         // SDK callback events
-        app.on(PTV.EventType.CONFIG_READY, (data) => {
+        ptvsdk.on(PTV.EventType.CONFIG_READY, (data) => {
           // NOTE: AMP does not support application/vnd.apple.mpegurl
           if (data && data.type === 'application/vnd.apple.mpegurl') {
             data.type = 'application/x-mpegURL';
           }
 
           // Add DOM Binding
-          player.container.appendChild(app.el());
+          player.container.ptvsdkendChild(ptvsdk.el());
 
           // Set Media
           player.media = {
@@ -50,12 +50,14 @@
         });
 
         // Player callback events
-        player.addEventListener('loadeddata', () => app.start());
-        player.addEventListener('ended', () => app.stop());
-        player.addEventListener('error', () => app.stop());
-        player.addEventListener('pause', () => app.hide());
-        player.addEventListener('play', () => app.show());
-        player.addEventListener('timeupdate', (time) => app.timeUpdate(time));
+        player.addEventListener('loadeddata', ptvsdk.start());
+        player.addEventListener('ended', ptvsdk.stop());
+        player.addEventListener('error', ptvsdk.stop());
+        player.addEventListener('pause', ptvsdk.hide());
+        player.addEventListener('play', ptvsdk.show());
+        player.addEventListener('timeupdate', (time) =>
+          ptvsdk.timeUpdate(time)
+        );
       });
     </script>
   </body>

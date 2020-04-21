@@ -55,11 +55,12 @@
         player.removeEventListener('play', handleFirstPlay);
         ptvsdk.start();
       });
-      player.addEventListener('ended', () => ptvsdk.stop());
-      player.addEventListener('error', () => ptvsdk.stop());
-      player.addEventListener('pause', () => ptvsdk.hide());
-      player.addEventListener('play', () => ptvsdk.show());
-      player.addEventListener('timeupdate', () =>
+      player.addEventListener('ended', ptvsdk.stop());
+      player.addEventListener('error', ptvsdk.stop());
+      player.addEventListener('pause', ptvsdk.hide());
+      player.addEventListener('play', ptvsdk.show());
+      player.addEventListener(
+        'timeupdate',
         ptvsdk.timeUpdate(player.currentTime)
       );
     </script>
