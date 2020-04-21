@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brightcove Basic Example</title>
-  <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      background-color: black;
-    }
-  </style>
-  <script src="//players.brightcove.net/5687692865001/default_default/index.min.js"></script>
-  <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
-</head>
-<body>
-  <div id="ptv-root"></div>
-  <video-js id="brightcove-player" class="video-js vjs-fill vjs-big-play-centered" controls />
-  <script>
-    const player = videojs('brightcove-player');
-    const ptvsdk = new PTV(null, {
-      domId: 'ptv-root',
-      channelId: '5c701be7dc3d20080e4092f4',
-      streamId: '5de7e7c2a6adde5211684519'
-    });
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brightcove Basic Example</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background-color: black;
+      }
+    </style>
+    <script src="//players.brightcove.net/5687692865001/default_default/index.min.js"></script>
+    <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
+  </head>
+  <body>
+    <div id="ptv-root"></div>
+    <video-js
+      id="brightcove-player"
+      class="video-js vjs-fill vjs-big-play-centered"
+      controls
+      playsinline
+      muted
+    />
+    <script>
+      const player = videojs("brightcove-player");
+      const ptvsdk = new PTV(null, {
+        domId: "ptv-root",
+        channelId: "5c701be7dc3d20080e4092f4",
+        streamId: "5de7e7c2a6adde5211684519",
+      });
 
-    // SDK callback events
-    ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
-      player.el().appendChild(ptvsdk.el());
-      player.src(data.src);
-    });
+      // SDK callback events
+      ptvsdk.on(PTV.EventType.CONFIG_READY, (data) => {
+        player.el().appendChild(ptvsdk.el());
+        player.src(data.src);
+      });
 
-    // Player callback events
-    player.one('play', () => ptvsdk.start())
-    player.on('ended', () => ptvsdk.stop());
-    player.on('error', () => ptvsdk.stop());
-    player.on('pause', () => ptvsdk.hide());
-    player.on('play', () => ptvsdk.show());
-    player.on('timeupdate', () => ptvsdk.timeUpdate(player.currentTime()));
-  </script>
-</body>
+      // Player callback events
+      player.one("play", () => ptvsdk.start());
+      player.on("ended", () => ptvsdk.stop());
+      player.on("error", () => ptvsdk.stop());
+      player.on("pause", () => ptvsdk.hide());
+      player.on("play", () => ptvsdk.show());
+      player.on("timeupdate", () => ptvsdk.timeUpdate(player.currentTime()));
+    </script>
+  </body>
 </html>
