@@ -8,4 +8,4 @@ Example integrations using Bitmovin Player v7
 
 - [Code](./basic.html)
 - [Demo](https://prometheantv.github.io/web-examples/bitmovin/basic.html)
-- [JSFiddle](https://jsfiddle.net/tomjohnson916/86zka4nr/)
+- [JSFiddle](https://jsfiddle.net/prometheantv/n1vobwzp/)

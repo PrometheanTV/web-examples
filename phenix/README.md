@@ -8,4 +8,4 @@ Example integrations using Phenix Real Time
 
 - [Code](./basic.html)
 - [Demo](https://prometheantv.github.io/web-examples/phenix/basic.html)
-- [JSFiddle](https://jsfiddle.net/tomjohnson916/jk2y6abn/)
+- [JSFiddle](https://jsfiddle.net/prometheantv/h15Lv0j3/)

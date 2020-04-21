@@ -8,4 +8,4 @@ Example integrations using Twitch Interactive Embed
 
 - [Code](./basic.html)
 - [Demo](https://prometheantv.github.io/web-examples/twitch/basic.html)
-- [JSFiddle](https://jsfiddle.net/tomjohnson916/u6vrymno/)
+- [JSFiddle](https://jsfiddle.net/prometheantv/uo5e1hax/)

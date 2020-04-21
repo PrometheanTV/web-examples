@@ -27,16 +27,16 @@
     <div id="player-root"></div>
 
     <script>
-      const player = new Twitch.Player("player-root", {
-        width: "100%",
-        height: "100%",
-        channel: "streamerhouse",
+      const player = new Twitch.Player('player-root', {
+        width: '100%',
+        height: '100%',
+        channel: 'streamerhouse',
       });
 
       const ptvsdk = new PTV(null, {
-        domId: "ptv-root",
-        channelId: "5c701be7dc3d20080e4092f4",
-        streamId: "5de7e7c2a6adde5211684519",
+        domId: 'ptv-root',
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519',
       });
 
       player.addEventListener(Twitch.Player.PLAYING, function onPlaying() {
