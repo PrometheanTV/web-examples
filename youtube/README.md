@@ -8,4 +8,4 @@ Example integrations using Youtube Embed Player
 
 - [Code](./basic.html)
 - [Demo](https://prometheantv.github.io/web-examples/youtube/basic.html)
-- [JSFiddle](https://jsfiddle.net/tomjohnson916/npr6qfx7/58/)
+- [JSFiddle](https://jsfiddle.net/prometheantv/h15Lv0j3/)
