@@ -24,23 +24,23 @@
     <div id="ptv-root"></div>
     <div id="player-root"></div>
     <script>
-      const API_URL = "https://www.youtube.com/iframe_api";
-      const tag = document.createElement("script");
+      const API_URL = 'https://www.youtube.com/iframe_api';
+      const tag = document.createElement('script');
       const ptvsdk = new PTV(null, {
-        domId: "ptv-root",
-        channelId: "5c701be7dc3d20080e4092f4",
-        streamId: "5de7e7c2a6adde5211684519",
+        domId: 'ptv-root',
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519',
       });
 
       tag.src = API_URL;
-      const firstScriptTag = document.getElementsByTagName("script")[0];
+      const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       let player;
 
       function onYouTubeIframeAPIReady() {
-        player = new YT.Player("player-root", {
-          videoId: "6mhxw2y1OD8",
+        player = new YT.Player('player-root', {
+          videoId: '6mhxw2y1OD8',
           events: {
             onReady: onPlayerReady,
             onStateChange: onPlayerStateChange,
