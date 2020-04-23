@@ -41,17 +41,17 @@
       });
 
       // SDK callback events
-      ptvsdk.on(PTV.EventType.CONFIG_READY, (data) => {
+      ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
         player.el().appendChild(ptvsdk.el());
         player.src(data.src);
       });
 
       // Player callback events
-      player.one('play', ptvsdk.start());
-      player.on('ended', ptvsdk.stop());
-      player.on('error', ptvsdk.stop());
-      player.on('pause', ptvsdk.hide());
-      player.on('play', ptvsdk.show());
+      player.one('play', () => ptvsdk.start());
+      player.on('ended', () => ptvsdk.stop());
+      player.on('error', () => ptvsdk.stop());
+      player.on('pause', () => ptvsdk.hide());
+      player.on('play', () => ptvsdk.show());
       player.on('timeupdate', ptvsdk.timeUpdate(player.currentTime()));
     </script>
   </body>

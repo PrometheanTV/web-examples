@@ -32,14 +32,14 @@
       controls
     ></video>
     <script>
-      const sdk = window["phenix-web-sdk"];
-      const player = videojs("videojs-player", { autoplay: true });
+      const sdk = window['phenix-web-sdk'];
+      const player = videojs('videojs-player', { autoplay: true });
       const app = new PTV(null, {
-        domId: "ptv-root",
-        channelId: "5c701be7dc3d20080e4092f4",
-        streamId: "5de7e7c2a6adde5211684519",
+        domId: 'ptv-root',
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519',
       });
-      const channelAlias = "phenixWebsiteDemo";
+      const channelAlias = 'phenixWebsiteDemo';
 
       let disposables = [];
 
@@ -49,15 +49,15 @@
         let isOtherMobile = /Android|webOS|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(
           navigator.userAgent
         );
-        let videoElement = player.el().querySelector(".vjs-tech");
-        let backendUri = "https://demo-integration.phenixrts.com/pcast";
-        let features = ["real-time", "hls"];
+        let videoElement = player.el().querySelector('.vjs-tech');
+        let backendUri = 'https://demo-integration.phenixrts.com/pcast';
+        let features = ['real-time', 'hls'];
         let adminApiProxyClient = new sdk.net.AdminApiProxyClient();
 
         adminApiProxyClient.setBackendUri(backendUri);
         adminApiProxyClient.setAuthenticationData({
-          userId: "my-user-id-that-is-NOT-related-to-application-id",
-          password: "my-password-that-is-NOT-related-to-secret",
+          userId: 'my-user-id-that-is-NOT-related-to-application-id',
+          password: 'my-password-that-is-NOT-related-to-secret',
         });
 
         let channelExpressOptions = {
@@ -68,7 +68,7 @@
         let joinChannelOptions = {
           alias: channelAlias,
           videoElement: videoElement,
-          streamSelectionStrategy: "most-recent",
+          streamSelectionStrategy: 'most-recent',
         };
 
         let channel = new sdk.express.ChannelExpress(channelExpressOptions);
@@ -77,7 +77,7 @@
           joinChannelOptions,
           function joinChannelCallback(error, response) {
             if (error) {
-              console.error("Unable to join channel", error);
+              console.error('Unable to join channel', error);
               // Handle error
               return;
             }
@@ -91,9 +91,9 @@
             if (response.renderer) {
               disposables.push(
                 response.renderer.on(
-                  "failedToPlay",
+                  'failedToPlay',
                   function handleFailedToPlay(reason) {
-                    if (isMobileAppleDevice && reason === "failed-to-play") {
+                    if (isMobileAppleDevice && reason === 'failed-to-play') {
                       videoElement.onplay = function () {
                         response.renderer.start(videoElement);
                         videoElement.onplay = null;
@@ -108,18 +108,18 @@
       };
 
       // SDK callback events
-      app.on(PTV.EventType.CONFIG_READY, (data) => {
+      app.on(PTV.EventType.CONFIG_READY, data => {
         player.el().appendChild(app.el());
         setupPhenix();
       });
 
       // Player callback events
-      player.one("play", () => app.start());
-      player.on("ended", () => app.stop());
-      player.on("error", () => app.stop());
-      player.on("pause", () => app.hide());
-      player.on("play", () => app.show());
-      player.on("timeupdate", () => app.timeUpdate(player.currentTime()));
+      player.one('play', () => app.start());
+      player.on('ended', () => app.stop());
+      player.on('error', () => app.stop());
+      player.on('pause', () => app.hide());
+      player.on('play', () => app.show());
+      player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
     </script>
   </body>
 </html>

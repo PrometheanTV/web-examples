@@ -38,7 +38,7 @@
       });
 
       // SDK callback events
-      ptvsdk.on(PTV.EventType.CONFIG_READY, (data) => {
+      ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
         player.element.appendChild(ptvsdk.el());
         player.source = {
           sources: [
@@ -55,10 +55,10 @@
         player.removeEventListener('play', handleFirstPlay);
         ptvsdk.start();
       });
-      player.addEventListener('ended', ptvsdk.stop());
-      player.addEventListener('error', ptvsdk.stop());
-      player.addEventListener('pause', ptvsdk.hide());
-      player.addEventListener('play', ptvsdk.show());
+      player.addEventListener('ended', () => ptvsdk.stop());
+      player.addEventListener('error', () => ptvsdk.stop());
+      player.addEventListener('pause', () => ptvsdk.hide());
+      player.addEventListener('play', () => ptvsdk.show());
       player.addEventListener(
         'timeupdate',
         ptvsdk.timeUpdate(player.currentTime)

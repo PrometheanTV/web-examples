@@ -44,18 +44,20 @@
         player.removeEventListener(Twitch.Player.PLAYING, onPlaying);
       });
 
-      player.addEventListener(Twitch.Player.PLAY, ptvsdk.show());
-      player.addEventListener(Twitch.Player.PAUSE, ptvsdk.hide());
-      player.addEventListener(Twitch.Player.OFFLINE, ptvsdk.stop());
-      player.addEventListener(Twitch.Player.PLAYBACK_BLOCKED, ptvsdk.stop());
-      player.addEventListener(Twitch.Player.ENDED, ptvsdk.stop());
+      player.addEventListener(Twitch.Player.PLAY, () => ptvsdk.show());
+      player.addEventListener(Twitch.Player.PAUSE, () => ptvsdk.hide());
+      player.addEventListener(Twitch.Player.OFFLINE, () => ptvsdk.stop());
+      player.addEventListener(Twitch.Player.PLAYBACK_BLOCKED, () =>
+        ptvsdk.stop()
+      );
+      player.addEventListener(Twitch.Player.ENDED, () => ptvsdk.stop());
 
       // Note: Twitch Player does not support time update events
       // https://dev.twitch.tv/docs/embed/video-and-clips#interactive-frames-for-live-streams-and-vods
-      // player.addEventListener(Twitch.Player.TIME_UPDATE, ptvsdk.start());
+      // player.addEventListener(Twitch.Player.TIME_UPDATE, () => ptvsdk.start());
 
       /* If player uses PTV API for twitchSource, set here
-      ptvsdk.on(PTV.EventType.CONFIG_READY, (data) => {
+      ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
         player.setChannel(data.twitchSource);
       });
       */
