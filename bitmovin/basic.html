@@ -41,16 +41,16 @@
           muted: true,
         },
         events: {
-          onSourceLoaded: ptvsdk.start(),
-          onPlay: ptvsdk.show(),
-          onPaused: ptvsdk.hide(),
-          onPlaybackFinished: ptvsdk.stop(),
-          onError: ptvsdk.stop(),
-          onTimeChanged: (e) => ptvsdk.timeUpdate(e.time),
+          onSourceLoaded: () => ptvsdk.start(),
+          onPlay: () => ptvsdk.show(),
+          onPaused: () => ptvsdk.hide(),
+          onPlaybackFinished: () => ptvsdk.stop(),
+          onError: () => ptvsdk.stop(),
+          onTimeChanged: e => ptvsdk.timeUpdate(e.time),
         },
       });
 
-      ptvsdk.on(PTV.EventType.CONFIG_READY, (data) => {
+      ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
         player.getFigure().appendChild(ptvsdk.el());
         player.load({ hls: data.src });
       });

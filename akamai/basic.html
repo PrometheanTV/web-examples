@@ -25,7 +25,7 @@
       akamai.amp.AMP.create('player-root', {
         playsinline: true,
         autoplay: 'muted',
-      }).then((player) => {
+      }).then(player => {
         const ptvsdk = new PTV(null, {
           domId: 'ptv-root',
           channelId: '5c701be7dc3d20080e4092f4',
@@ -33,7 +33,7 @@
         });
 
         // SDK callback events
-        ptvsdk.on(PTV.EventType.CONFIG_READY, (data) => {
+        ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
           // NOTE: AMP does not support application/vnd.apple.mpegurl
           if (data && data.type === 'application/vnd.apple.mpegurl') {
             data.type = 'application/x-mpegURL';
@@ -50,14 +50,12 @@
         });
 
         // Player callback events
-        player.addEventListener('loadeddata', ptvsdk.start());
-        player.addEventListener('ended', ptvsdk.stop());
-        player.addEventListener('error', ptvsdk.stop());
-        player.addEventListener('pause', ptvsdk.hide());
-        player.addEventListener('play', ptvsdk.show());
-        player.addEventListener('timeupdate', (time) =>
-          ptvsdk.timeUpdate(time)
-        );
+        player.addEventListener('loadeddata', () => ptvsdk.start());
+        player.addEventListener('ended', () => ptvsdk.stop());
+        player.addEventListener('error', () => ptvsdk.stop());
+        player.addEventListener('pause', () => ptvsdk.hide());
+        player.addEventListener('play', () => ptvsdk.show());
+        player.addEventListener('timeupdate', time => ptvsdk.timeUpdate(time));
       });
     </script>
   </body>

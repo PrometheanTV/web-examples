@@ -28,7 +28,7 @@
       });
 
       // SDK callback events
-      ptvsdk.on(PTV.EventType.CONFIG_READY, function (data) {
+      ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
         player.loadSource(data.src);
         player.attachMedia(video);
       });
@@ -38,10 +38,10 @@
         video.removeEventListener('play', handleFirstPlay);
         ptvsdk.start();
       });
-      video.addEventListener('ended', ptvsdk.stop());
-      video.addEventListener('error', ptvsdk.stop());
-      video.addEventListener('pause', ptvsdk.hide());
-      video.addEventListener('play', ptvsdk.show());
+      video.addEventListener('ended', () => ptvsdk.stop());
+      video.addEventListener('error', () => ptvsdk.stop());
+      video.addEventListener('pause', () => ptvsdk.hide());
+      video.addEventListener('play', () => ptvsdk.show());
       video.addEventListener(
         'timeupdate',
         ptvsdk.timeUpdate(video.currentTime)
