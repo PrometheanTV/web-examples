@@ -36,12 +36,12 @@
       });
 
       // Player callback events
-      player.once('ready', player.getContainer().appendChild(ptvsdk.el()));
-      player.once('play', ptvsdk.start());
-      player.on('ended', ptvsdk.stop());
-      player.on('error', ptvsdk.stop());
-      player.on('pause', ptvsdk.hide());
-      player.on('play', ptvsdk.show());
+      player.once('ready', () => player.getContainer().appendChild(ptvsdk.el()));
+      player.once('play', () => ptvsdk.start());
+      player.on('ended', () => ptvsdk.stop());
+      player.on('error', () => ptvsdk.stop());
+      player.on('pause', () => ptvsdk.hide());
+      player.on('play', () => ptvsdk.show());
       player.on('time', (time) => ptvsdk.timeUpdate(time.position));
     </script>
   </body>
