@@ -8,6 +8,7 @@ Example pages demonstrating the Promethean TV JavaScript SDK with different play
 - [Bitmovin](bitmovin/)
 - [Brightcove](brightcove/)
 - [Hls.js](hlsjs/)
+- [HTML5 Video](html5/)
 - [JW Player](jwplayer/)
 - [Phenix RTS](phenix/)
 - [THEOplayer](theo/)
