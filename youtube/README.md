@@ -1,4 +1,4 @@
-# Bitmovin
+# YouTube
 
 Example integrations using Youtube Embed Player
 

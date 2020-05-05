@@ -1,4 +1,4 @@
-# Bitmovin
+# Twitch
 
 Example integrations using Twitch Interactive Embed
 
