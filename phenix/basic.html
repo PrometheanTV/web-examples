@@ -11,29 +11,25 @@
         margin: 0;
         background-color: black;
       }
-
-      #videojs-player {
-        height: 100%;
-        width: 100%;
-      }
     </style>
-    <link href="//unpkg.com/video.js/dist/video-js.css" rel="stylesheet" />
-    <script src="//unpkg.com/video.js/dist/video.js"></script>
     <script src="//dl.phenixrts.com/WebSDK/2019.2.latest/phenix-web-sdk.min.js"></script>
-    <script src="//unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
     <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
   </head>
-
   <body>
-    <div id="ptv-root"></div>
     <video
-      id="videojs-player"
-      class="video-js vjs-default-skin"
+      id="video-root"
+      width="100%"
+      height="100%"
+      muted
+      autoplay
       controls
+      playsinline
     ></video>
+    <div id="ptv-root"></div>
+
     <script>
       const sdk = window['phenix-web-sdk'];
-      const player = videojs('videojs-player', { autoplay: true });
+      const videoElement = document.getElementById('video-root');
       const app = new PTV(null, {
         domId: 'ptv-root',
         channelId: '5c701be7dc3d20080e4092f4',
@@ -49,7 +45,6 @@
         let isOtherMobile = /Android|webOS|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(
           navigator.userAgent
         );
-        let videoElement = player.el().querySelector('.vjs-tech');
         let backendUri = 'https://demo-integration.phenixrts.com/pcast';
         let features = ['real-time', 'hls'];
         let adminApiProxyClient = new sdk.net.AdminApiProxyClient();
@@ -107,19 +102,19 @@
         );
       };
 
-      // SDK callback events
-      app.on(PTV.EventType.CONFIG_READY, data => {
-        player.el().appendChild(app.el());
-        setupPhenix();
+      videoElement.addEventListener('play', function firstplay() {
+        app.start();
+        videoElement.removeEventListener('play', firstplay);
       });
+      videoElement.addEventListener('ended', () => app.stop());
+      videoElement.addEventListener('error', () => app.stop());
+      videoElement.addEventListener('pause', () => app.hide());
+      videoElement.addEventListener('play', () => app.show());
+      videoElement.addEventListener('timeupdate', () =>
+        app.timeUpdate(videoElement.currentTime)
+      );
 
-      // Player callback events
-      player.one('play', () => app.start());
-      player.on('ended', () => app.stop());
-      player.on('error', () => app.stop());
-      player.on('pause', () => app.hide());
-      player.on('play', () => app.show());
-      player.on('timeupdate', () => app.timeUpdate(player.currentTime()));
+      setupPhenix();
     </script>
   </body>
 </html>
