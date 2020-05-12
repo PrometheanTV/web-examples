@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTML5 Basic Example</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background-color: black;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
+  </head>
+
+  <body>
+    <div id="ptv-root"></div>
+    <video id="video-root" muted autoplay playsinline controls>
+      <source
+        src="http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4"
+        type="video/mp4"
+      />
+    </video>
+    <script>
+      const videoElement = document.getElementById('video-root');
+      const app = new PTV(null, {
+        domId: 'ptv-root',
+        channelId: '5c701be7dc3d20080e4092f4',
+        streamId: '5de7e7c2a6adde5211684519',
+      });
+
+      // Player callback events
+      videoElement.addEventListener('play', function firstplay() {
+        app.start();
+        videoElement.removeEventListener('play', firstplay);
+      });
+      videoElement.addEventListener('ended', () => app.stop());
+      videoElement.addEventListener('error', () => app.stop());
+      videoElement.addEventListener('pause', () => app.hide());
+      videoElement.addEventListener('play', () => app.show());
+      videoElement.addEventListener('timeupdate', () =>
+        app.timeUpdate(videoElement.currentTime)
+      );
+    </script>
+  </body>
+</html>
