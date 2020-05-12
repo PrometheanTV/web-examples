@@ -1,0 +1,51 @@
+<head>
+  <title>Shaka Player Basic Example</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/shaka-player/2.5.11/shaka-player.compiled.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/shaka-player/2.5.11/shaka-player.ui.min.js"></script>
+  <script src="//cdn.promethean.tv/sdk/latest/ptv.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      background-color: #1a1a1a;
+      margin: 0;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="ptv-root"></div>
+  <video id="video" controls autoplay playsinline></video>
+  <script>
+    const videoElement = document.getElementById('video');
+    const player = new shaka.Player(videoElement);
+    const ptvsdk = new PTV(null, {
+      domId: 'ptv-root',
+      channelId: '5eba1c2ab3caf96a8241cb17',
+      streamId: '5eba1c424731993bf1de0228',
+    });
+
+    // SDK callback events
+    ptvsdk.on(PTV.EventType.CONFIG_READY, data => {
+      player.load(data.src);
+    });
+
+    // Player callback events
+    videoElement.addEventListener('play', function firstplay() {
+      ptvsdk.start();
+      videoElement.removeEventListener('play', firstplay);
+    });
+    videoElement.addEventListener('ended', () => ptvsdk.stop());
+    videoElement.addEventListener('error', () => ptvsdk.stop());
+    videoElement.addEventListener('pause', () => ptvsdk.hide());
+    videoElement.addEventListener('play', () => ptvsdk.show());
+    videoElement.addEventListener('timeupdate', () =>
+      ptvsdk.timeUpdate(videoElement.currentTime)
+    );
+  </script>
+</body>
