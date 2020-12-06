@@ -1,0 +1,36 @@
+<!-- <!DOCTYPE html> -->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/img/favicon.png" rel="shortcut icon" type="image/x-icon">
+
+    <title>Promethean TV Google FullScreen Shaka Video Player</title>
+    
+    <!-- VIDEO JS CSS -->
+    <link href="/css/controls.css" rel="stylesheet">
+    
+    <!-- PROMETHEAN TV VIDEO JS STYLES -->
+    <link href="/css/index.css" rel="stylesheet">    
+  </head>
+
+  <body>
+    <div id="video-container" >            
+      <video id="video" controls autoplay playsinline></video>
+      <div id="ptv-root"></div>
+    </div>        
+  </body>
+
+  <!-- SHAKA SCRIPT -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/shaka-player/3.0.5/shaka-player.compiled.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/shaka-player/3.0.5/shaka-player.ui.min.js"></script>  
+
+  <!-- PTV SDK SCRIPTS -->  
+  <script src="//comdev.embed.promethean.tv/static/js/latest/ptv.js"></script>
+  
+  <!-- EMBED BOOTSTRAP -->
+  <script src="/js/index.js"></script>
+
+</html>
