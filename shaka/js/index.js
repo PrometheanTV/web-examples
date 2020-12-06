@@ -26,12 +26,12 @@
     const player = new shaka.Player(videoElement);
 
     //Setting UI configuration JSON object
-		const uiConfig = {};
+    const uiConfig = {};
 
-		//Configuring elements to be displayed on video player control panel
-	  uiConfig['controlPanelElements'] = ['play_pause', 'mute', 'volume', 'time_and_duration', 'fullscreen', 'overflow_menu' ];
+    //Configuring elements to be displayed on video player control panel
+    uiConfig['controlPanelElements'] = ['play_pause', 'mute', 'volume', 'time_and_duration', 'fullscreen', 'overflow_menu' ];
 		  
-		//Setting up shaka player UI
+    //Setting up shaka player UI
     const ui = new shaka.ui.Overlay(player, containerElement, videoElement);
 
     ui.configure(uiConfig); //configure UI
