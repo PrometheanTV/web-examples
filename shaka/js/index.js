@@ -83,17 +83,5 @@
     videoElement.addEventListener('timeupdate', () =>
       app.timeUpdate(videoElement.currentTime)
     );
-    
-    // Attach QUnit Test Harness to Embed.
-    if(params.test) {
-        // Wait for Everything to load. then run the tests.
         
-        loadScript('https://code.jquery.com/qunit/qunit-2.10.0.js', function(){
-            loadScript('/common/tests/common.js', function(){
-                console.log('Common Tests Loaded')
-                // Run the Tests
-                loadScript('/ptv/tests/index.js',() => {console.log('test script loaded')});
-            });            
-        });            
-    }
   })();
