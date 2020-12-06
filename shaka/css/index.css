@@ -1,0 +1,27 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;       
+}
+
+video {
+    width: 100%;
+    height: 100%;
+}
+
+#video-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* HIDE THE SHADOW DOM CONTROLS */
+video::-webkit-media-controls-panel {
+	display: none;
+}
+
+.shaka-bottom-controls {
+    padding:1%;
+}
