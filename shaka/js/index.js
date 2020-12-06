@@ -12,11 +12,11 @@
 
     // Set the channel &/or stream id for Unit Test 1 Default Stream if not passed into embed
     if(!params.channel) {          
-      params.channel  = '5eb5f340a8dc106a89cbe590';        
+      params.channel  = '5fcd2af18c741afc98696ce3';        
     }
 
     if(!params.stream) {
-      params.stream = '5eb5f45049fd126a900c7d8c';
+      params.stream = '5fcd2b0bcfb31e02b95fe0dc';
     }
 
     // console.log('Query Params', params);
